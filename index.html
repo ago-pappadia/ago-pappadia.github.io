@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang=it>
+          <head>
+            <title>Robot di Agostino Pappadia </title>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <style>
+                  html, body { margin: 0; padding: 0; }
+                  canvas { display: block; }
+              </style>
+          </head>
+              <body>
+                  <script>
+				  
+				  function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(70,190,0);
+  
+	//R-G-B
+	fill(150,0,150)			
+	circle(mouseX+20,mouseY-20,40);//head
+	circle(mouseX+10,mouseY-22,7);//right eye
+	circle(mouseX+29,mouseY-22,7);//left eye
+	square(mouseX+17,mouseY-17,5);//nose
+	rect(mouseX+12,mouseY-9,16,5);//mouth
+	rect(mouseX-4,mouseY,50,80);//chest
+	rect(mouseX+46,mouseY,50,15);//right arm
+	rect(mouseX-53,mouseY,50,15);//left arm
+	rect(mouseX-4,mouseY+80,15,50);//right leg
+	rect(mouseX+31,mouseY+80,15,50);//left arm 
+	circle(mouseX+7,mouseY-41,10);
+	circle(mouseX+32,mouseY-41,10);
+	}
+
+                  </script>
+		     </body> 
+				    </html>
+				  
