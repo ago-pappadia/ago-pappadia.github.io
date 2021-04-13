@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang=it>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Pappadia Agostino">
+		<meta name="description" content="gioco acchiappa palline">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"> </script>
+        <title>Acchiappa Palline</title>
+		
+		<style>
+			html, body {
+			margin: 0;
+			padding: 0;
+			}
+			
+			canvas{
+			display: block;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<script>
+			//Dichiaro le variabili
+			
+			// coordinate x e y delle palline
+			let cPallinaX = [];
+			let cPallinaY = [];
+			// indice dell'array
+			let indice;
+			//diametro della pallina
+			let cDiametro=50;
+			//coordinata x del rettangolo
+			let cRettangoloX;
+			//Variabile del punteggio
+			let score=0;
+			//Variabile per dichiarare gli fps
+			let frameRate;
+			
+			
+			function setup() {
+				//faccio cadere le palline in differenti posizioni y
+				for(indice=0;indice<20;indice++) {
+                    cPallinaY[indice]=Math.random() *-2000;
+					
+				}
+				
+				//faccio cadere le palline in differenti posizioni x
+				for(indice=0;indice<20;indice++) {
+                    cPallinaX[indice]=Math.random() *800;
+					
+				}
+				//area da disegno
+				createCanvas(600, 600);	
+			}
+			
+			function draw() {
+				background(0,0,0);
+				//disegno le palline in un ciclo for 
+				for(indice=0;indice<20;indice++) {
+					circle(cPallinaX[indice],cPallinaY[indice],cDiametro);
+					
+				}
+				
+				
+				
+				//faccio in modo che io possa regolare il movimento della racchetta col mouse
+				cRettangoloX = mouseX-80;
+				//se coordinata x dell'angolo in alto a sinistra del rettangolo cRettangoloX è <=0 allora cRettangoloX assume valore 0, e facendo ciò il rettangolo non fuoriesce dall'area di disegno
+				if (cRettangoloX <= 0) {
+					cRettangoloX = 0;
+				}
+				//aggiungo 2 alla cY della pallina ogni volta per farla cadere
+				for(indice=0;indice<20;indice++) {
+					cPallinaY[indice]=cPallinaY[indice]+2;
+					
+					
+				}
+				
+				//se coordinata y dell'angolo in alto a sinistra della racchetta rettangolo y è >=470, si deve assegnare il valore 470 in modo che il rettangolo non esca fuori dall'area i disegno
+				if (cRettangoloX >= 470) {
+					cRettangoloX = 470;
+					
+				}
+				//grazie a questa condizione riesco a far scomparire e riapparire la pallina quando viene toccata dalla racchetta
+				for(indice=0;indice<20;indice++) {
+					if(cPallinaY[indice]>=505 && cPallinaY[indice]<=575){
+						if(cPallinaX[indice]<cRettangoloX+205 && cPallinaX[indice]>cRettangoloX-25 ){
+							cPallinaY[indice]=Math.random() *-2000;			
+							score++;     
+						}
+					}
+				}
+				//grazie a questa condione faccio in modo che se la pallina supera il rettangolo viene fatta riapparire nella coordinata 0 per far si che il gioco non termini
+				for(indice=0;indice<20;indice++) {
+					if(cPallinaY[indice]>600){
+						cPallinaY[indice]=Math.random() *-200;
+						
+					}
+				}
+				//racchetta
+				fill(255,255,255);
+				rect(cRettangoloX,550,150,30);
+				fill(255,255,255);
+				//Scrittura e incremento dello score
+				fill(255,255,255);
+				text( score,50,25);
+				text("score:",10,25);
+				// fps
+				fill(255,255,255);
+				frameRate = getFrameRate();
+				text(frameRate, 480, 25);
+				
+			}	
+		</script>
+	</body>
+</html>
